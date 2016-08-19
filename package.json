@@ -1,0 +1,13 @@
+{
+  "name": "nodehook",
+  "version": "1.0.0",
+  "description": "Autodeploy github webhook node server.",
+  "main": "hook.js",
+  "dependencies": {
+    "githubhook": "^1.6.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node hook.js"
+  }
+}
