@@ -5,8 +5,9 @@ var github = require('githubhook').githubhook({
   path: '/',
 })
 
-var reponame = 'SomeApp'
-var deployDir = '../someapp'
+var reponame = 'ExampleApp'
+var deployDir = '../example'
+var deployEnv = 'exenv'
 
 github.on(reponame + ':ref/heads/master', function (event, data) {
   console.log('event', JSON.stringify(event))
@@ -15,7 +16,7 @@ github.on(reponame + ':ref/heads/master', function (event, data) {
     event.action === 'closed' &&
     event.pull_request.merged === true
   ) {
-    spawn('sh', ['./deploy.sh', deployDir])
+    spawn('sh', ['./deploy.sh', deployDir, deployEnv])
   }
 })
 
