@@ -7,7 +7,7 @@ var PROJECT = {
   path: '../example',
 }
 var DEPLOY_ARGS = {
-  '--name': PROJECT.name,
+  '--name': PROJECT.name + '-container',
   '-e': [
     'host="0.0.0.0"',
     'port="80"',
