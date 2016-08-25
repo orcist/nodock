@@ -26,15 +26,15 @@ var github = githubhook({
   path: '/',
 })
 
-github.on(PROJECT.repository + ':ref/heads/master', function(event, data) {
-  console.log('event', JSON.stringify(event))
+github.on('pull_request:' + PROJECT.repository, function(ref, data) {
   if (
-    event.pull_request &&
-    event.action === 'closed' &&
-    event.pull_request.merged === true
+    data.pull_request &&
+    data.action === 'closed' &&
+    data.pull_request.merged === true &&
+    data.pull_request.base.ref === 'master'
   ) {
     var args = unpackArgs(DEPLOY_ARGS)
-    console.log('running', './deploy.sh' + [PROJECT.name, PROJECT.path, args].join(' '))
+    console.log('running', './deploy.sh ' + [PROJECT.name, PROJECT.path, args].join(' '))
     spawn('sh', ['./deploy.sh', PROJECT.name, PROJECT.path, args])
   }
 })
