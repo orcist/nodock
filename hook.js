@@ -35,7 +35,13 @@ github.on('pull_request:' + PROJECT.repository, function(ref, data) {
   ) {
     var args = unpackArgs(DEPLOY_ARGS)
     console.log('running', './deploy.sh ' + [PROJECT.name, PROJECT.path, args].join(' '))
-    spawn('sh', ['./deploy.sh', PROJECT.name, PROJECT.path, args])
+    var child = spawn('sh', ['./deploy.sh', PROJECT.name, PROJECT.path, args])
+    child.stdout.on('data', function(data) {
+        console.log(data)
+    })
+    child.stderr.on('data', function(error) {
+        console.log(error)
+    })
   }
 })
 
