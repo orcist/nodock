@@ -5,7 +5,11 @@
 # $3..  -> docker arguments
 
 cd $2
-git pull
+
+git fetch --all
+git reset HEAD --hard
+git checkout master
+git reset origin/master --hard
 
 sudo docker kill $1-container
 sudo docker rm $1-container
