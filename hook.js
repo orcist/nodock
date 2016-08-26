@@ -34,10 +34,10 @@ github.on('pull_request:' + PROJECT.repository, function(ref, data) {
     data.pull_request.base.ref === 'master'
   ) {
     var args = unpackArgs(DEPLOY_ARGS)
-    console.log('running', './deploy.sh ' + [PROJECT.name, PROJECT.path, args].join(' '))
+    console.log('running', './deploy.sh ' + [PROJECT.name, PROJECT.path, 'master', args].join(' '))
 
     var child = spawn('bash',
-      ['./deploy.sh', PROJECT.name, PROJECT.path]
+      ['./deploy.sh', PROJECT.name, PROJECT.path, 'master']
         .concat(args.split(' '))
         .filter(function(e) { return e !== '' })
     )
