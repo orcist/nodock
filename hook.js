@@ -9,8 +9,8 @@ var PROJECT = {
 var DEPLOY_ARGS = {
   '--name': PROJECT.name + '-container',
   '-e': [
-    'host=\"0.0.0.0\"',
-    'port=\"80\"',
+    'host=0.0.0.0',
+    'port=80',
   ],
   '-p': '80:80',
   '-v': [
@@ -36,7 +36,7 @@ github.on('pull_request:' + PROJECT.repository, function(ref, data) {
     var args = unpackArgs(DEPLOY_ARGS)
     console.log('running', './deploy.sh ' + [PROJECT.name, PROJECT.path, args].join(' '))
 
-    var child = spawn('sh',
+    var child = spawn('bash',
       ['./deploy.sh', PROJECT.name, PROJECT.path]
         .concat(args.split(' '))
         .filter(function(e) { return e !== '' })
